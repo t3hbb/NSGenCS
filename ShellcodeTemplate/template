@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ReverseArray
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            SHELLCODEHERE
+            ENCRYPTHERE
+            StringBuilder hex = new StringBuilder(buf.Length * 2);
+            int totalCount = buf.Length;
+            for (int count = 0; count < totalCount; count++)
+            {
+                byte b = buf[count];
+
+                if ((count + 1) == totalCount) {
+                    hex.AppendFormat("0x{0:x2}", b);
+                }
+                else
+                {
+                    hex.AppendFormat("0x{0:x2}, ", b);
+                }
+
+                if ((count + 1) % 15 == 0)
+                {
+                    hex.Append("\n");
+                }
+            }
+            Console.WriteLine($"byte[] buf = new byte[{buf.Length}] {{\n{hex}\n}};");
+
+        }
+    }
+}

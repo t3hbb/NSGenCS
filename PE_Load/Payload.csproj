@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TargetFramework>net45</TargetFramework>
+	<LangVersion>9.0</LangVersion>
+    <RuntimeIdentifiers>win10-x64</RuntimeIdentifiers>
+  </PropertyGroup>
+
+</Project>

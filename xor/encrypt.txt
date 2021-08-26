@@ -1,0 +1,4 @@
+		for (int j = 0; j < buf.Length; j++)
+                {
+                    buf[j] = (byte)((uint)buf[j] ^ KEYHERE);
+                }
