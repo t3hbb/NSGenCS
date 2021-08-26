@@ -100,7 +100,7 @@ You can also use the awesome donut framework (https://github.com/TheWover/donut)
 
 `donut -a 2 -f 7 -z 2 file.exe` will generate a loader.cs that you can use - PLEASE CHANGE THE VARIABLE NAME FROM my_buf to buf!!
 
-You can deliver nearly anything using a combination of donut and NSGenCS. donut is the closest framework to magic as far as I can tell. Want to deliver a tool that is detected but not a shellcode/beacon? Go for it - drop SharUp or SharpDump using this framwork. Just make sure you use a delivery template that supports console out if you need it.
+You can deliver nearly anything using a combination of donut and NSGenCS. donut is the closest framework to magic as far as I can tell. Want to deliver a tool that is detected but not a shellcode/beacon? Go for it - drop it using this framework and the donut loader.cs. Just make sure you use a delivery template that supports console out if you need it and specify any command line options you require (such as an output file if you don't have a template that supports console output) using the `-p"my command line options here"` flag in donut.
 
 # Pointless Functionality (Triggers AV Currently)
 
@@ -192,7 +192,7 @@ Add a -noclean switch to not clean up after execution for debugging purposes
 
 # Blue Team
 
-Since the payloads and templates vary so much and templates can be grabbed from anywhere, I have struggled to come up with a good way of detecting this. I strongly suggest that behavioural detection will be the best way to get visibility of these payloads executing in your environment, but if there are ideas on how to help out #TeamBlue then please let me know and I can up date this file.
+Since the payloads and templates vary so much and templates can be grabbed from anywhere, I have struggled to come up with a good way of detecting this. The framework isn't the thing to trigger on, it will be the methodology employed by the template. I strongly suggest that behavioural detection will be the best way to get visibility of these payloads executing in your environment, but if there are ideas on how to help out #TeamBlue then please let me know and I can up date this file. In memory scanning will pick up things like meterpreter but if you are using a payload that supports in memory obfuscation - well it's really tough.
 
 # Credits 
 
