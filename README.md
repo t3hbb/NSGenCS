@@ -75,6 +75,8 @@ Now you have to understand what your delivery template is doing, and it's requir
 
 Perfect!
 
+You can extend the existing templates or add your own in their own folder to include other defensive measures if you want.
+
 # Encrypt/Decrypt
 
 The two simple examples used don't really show the extensibility of the framework. Want to prepend code to your shellcode? This is where you can do it. 
@@ -84,7 +86,7 @@ You could even add code for in-memory decryption. Use the `encrypt` file to gene
 A simple example of how to add a 1000 byte NOP sled before your payload is included in the NOPSled method:
 
 ```
-    Array.Reverse(buf);
+    		Array.Reverse(buf);
 		Array.Resize(ref buf, (buf.Length) + 1000);
 		Array.Reverse(buf);
 		for (int j = 0; j < 1000 ; j++)
