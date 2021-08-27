@@ -13,7 +13,7 @@ Python3
 
 Simple method :
 
-`python NSGenCS.py file <CSharp Shellcode> -method <Obfuscation Method> -key <encryption/decryption key if required>`
+`python NSGenCS.py file <payload> -method <Obfuscation Method> -key <encryption/decryption key if required>`
 
 Should generate `payload.exe`
 
@@ -33,7 +33,7 @@ Should generate `payload.exe`
   
 # How do?
 
-This is a two stage process. The first takes your input file and obfuscates it according to your chosen method. Initially I have implemented two simple ones, the idea is that this will be an extensible framework that gives you the ability to customise it to your heart's content.
+This is a two-stage process. The first takes your input file and obfuscates it according to your chosen method. Initially I have implemented two simple ones, the idea is that this will be an extensible framework that gives you the ability to customise it to your heart's content.
 
 If we look at the two simple methods, `xor` and `reverse`, both folders contain an `encrypt.txt` and a `decrypt.txt`. These are C# files that contain the transformations that you wish to apply to your code. In the case of `reverse` this is just `Array.Reverse(buf);` These can be as complicated or as simple as you wish. 
 
@@ -51,7 +51,7 @@ To show how easy it is to modify templates, I borrowed the templates from pwndiz
 
 Modifications took less than a minute : 
 
-1. Download existing template to it's own folder, rename it to template and add the payload.csproj to the folder. The folder name will become the parameter you pass via -template
+1. Download existing template to its own folder, rename it to template and add the payload.csproj to the folder. 9 times out of 10 you can just copy an existing payload.csproj from one of the exiting templates, however if your delivery template has sopecifc requirements such as `System.EnterpriseServices` then some configuration will be required. The folder name will become the parameter you pass via -template
 
 ![image](https://user-images.githubusercontent.com/21687763/130445515-a0ffcbe4-eca5-4a32-8d75-18e3002a3533.png)
 
@@ -59,8 +59,8 @@ Modifications took less than a minute :
 
 ![image](https://user-images.githubusercontent.com/21687763/130443791-5641840b-152d-4c1d-a42d-16fab749fe78.png)
 
-3. Note that in this case the shellcode is stored in a variable called payload
-4. Search and replace payload with buf (please see notes below)
+3. Note that in this case the shellcode is stored in a variable called `payload`
+4. Search and replace `payload` with `buf` (please see notes below)
 5. Delete current payload
 6. Add SHELLCODEHERE and DECRYPTHERE
 
@@ -94,7 +94,9 @@ A simple example of how to add a 1000 byte NOP sled before your payload is inclu
                     buf[j] = (byte)((uint) 0x90);
                 }
 ```
-If you want to use AES encryption or the like, make sure that you ensure that you add the appropriate `using` to the necessary files such as `using System.Security.Cryptography;`. You can use  `KEYHERE` and `-key` for a static key or even key it to a hostname or something if you want to use a more targetted approach.
+If you want to use AES encryption or the like, make sure that you ensure that you add the appropriate `using` to the necessary files such as `using System.Security.Cryptography;`. You can use  `KEYHERE` and `-key` for a static key or even key it to a hostname or something if you want to use a more targeted approach.
+
+There is a DLL Injection template provided, however this doesn't take a payload as such, it takes a filename. I haven't modified this template to take the parameters from any of the methods, it's left as is so you can experiment with it. You don't need SHELLCODEHERE, ENCRYPTHERE or DECRYPTHERE, you just need to pass a string to it. You could just replace line 74 with `        string dllName = "KEYHERE";`. Create a new obfuscation method called 'Filename' and have blank encrypt and decrypt files. Or something like that - have a play :)
 
 # Donut
 
@@ -110,15 +112,15 @@ Also supplied is the PE_Load template adopted from Casey Smith's (@subTee) and a
 
 ![image](https://user-images.githubusercontent.com/21687763/130750571-b992a951-d32b-49cd-8fb9-778ce54aca88.png)
 
-Want to reflectively load a PE file? Well now you can. If you want.
+Want to reflectively load a PE file? Well now you can if you need to.
 
-If you still do it's just `PE2CS inputfile > outputfile.cs` and use the `outputfile.cs` as your C# input file.
+It's as simple as just `PE2CS inputfile.exe > outputfile.cs` and use the `outputfile.cs` as your C# input file.
 
-But it does show how you can use templates from all sorts of different projects, drop them in this framework and with a few minor adjustments, you're good to go.
+Hopefully this shows how you can use templates from all sorts of different projects, drop them in this framework and with a few minor adjustments, you're good to go.
 
 # PE2CS
 
-The included utility PE2CS will also convert any raw shellcdoe into the correct format to use with NSGENCS. Here we take the raw output from MSFVenom and parse it using PE2CS:
+The included utility PE2CS will also convert any raw shellcode into the correct format to use with NSGENCS. Here we take the raw output from MSFVenom and parse it using PE2CS:
 
 ```
 C:\Tools\NSGenCS>c:\metasploit-framework\bin\msfvenom.bat -p windows/x64/messagebox TEXT=NSGENCS TITLE=NSGENCS -f raw > msgbox.bin
@@ -168,17 +170,21 @@ Simples!
 
 Templates are provided just to give you an idea of how easy it is to modify existing templates or write your own. 
 
-Please don't raise issues because Thread_Hijack doesn't play nicely with stageless meterpreter or something! Understand the template you are using and how it interacts with the target system *and* your payload. I will close them and you will be sad.
+Please don't raise issues because Thread_Hijack doesn't play nicely with stageless Meterpreter or something! Understand the template you are using and how it interacts with the target system *and* your payload. I will close them and you will be sad.
 
-Don't use a meterpreter payload on a system that does in memory scanning for example. It will fail. And you will be sad. 
+Equally please don't raise an issue if your new delivery template doesn't compile because of the .csproj. Look at my code - do I look like I will be able to fix the problem? I'm barely scraping by here :)
+
+Understand your target environment - don't use a Meterpreter payload on a system that does in memory scanning for example. It will fail. And you will be sad. 
 
 You will also be sad if you just run `payload.exe notepad` all the time if there isn't a notepad instance running. 
 
 If you don't clean up a lot of the ConsoleWriteLines in the provided templates, you are going to be extremely noisy. This too will make you sad.
 
-If you don't rename the shellcode variable to buf (for example Donut outputs the file with my_buf as the variable) then you will see lots of red error messages when running NSGenCS. This will make you sad also.
+If you don't rename the shellcode variable to buf (for example Donut outputs the file with my_buf as the variable) then you will see lots of red error messages when running NSGenCS. This will make you sad also. It will probably look something like this: 
 
-Guess what - if you use a delivery template that uses ProcessStart with mimikatz and Defender, you will be sad.
+![image](https://user-images.githubusercontent.com/21687763/131107929-0b460516-9d2c-4f66-9895-953f01a4044c.png)
+
+Guess what - if you use a delivery template that uses ResumeThread with Mimikatz and Defender, you will be sad.
 
 Don't be sad.
 
@@ -194,7 +200,7 @@ Add a -noclean switch to not clean up after execution for debugging purposes
 
 # Blue Team
 
-Since the payloads and templates vary so much and templates can be grabbed from anywhere, I have struggled to come up with a good way of detecting this. The framework isn't the thing to trigger on, it will be the methodology employed by the template. I strongly suggest that behavioural detection will be the best way to get visibility of these payloads executing in your environment, but if there are ideas on how to help out #TeamBlue then please let me know and I can up date this file. In memory scanning will pick up things like meterpreter but if you are using a payload that supports in memory obfuscation - well it's really tough.
+Since the payloads and templates vary so much and templates can be grabbed from anywhere, I have struggled to come up with a good way of detecting this. The framework isn't the thing to trigger on, it will be the methodology employed by the template. I strongly suggest that behavioural detection will be the best way to get visibility of these payloads executing in your environment, but if there are ideas on how to help out #TeamBlue then please let me know and I can up date this file. In memory scanning will pick up things like Meterpreter but if you are using a payload that supports in memory obfuscation - well it's really tough.
 
 # Credits 
 
