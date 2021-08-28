@@ -192,11 +192,15 @@ This framework has been successfully tested with multiple delivery templates all
 
 # TO-DO
 
-Check that the payload file variable is buf & do regex witchcraft to replace it if not
+Check that the payload file variable is `buf` & do regex witchcraft to replace it if not. Some templates already use the `buf` so ideally, in v2 it can be worked to use a unique variable name.
 
 Check if encrypt/decrypt files have a KEYHERE placeholder and alert/break if -key not supplied
 
 Add a -noclean switch to not clean up after execution for debugging purposes
+
+Organise payloads and templates into their own folders for neatness
+
+Bit more error checking and breaks if things go sad
 
 # Blue Team
 
