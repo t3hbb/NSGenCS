@@ -5,9 +5,11 @@ An extremely simple, yet extensible framework to evade AV with obfuscated payloa
 
 # Installation Requirements
 
+Currently only runs under Windows
+
 Python3
 
-.NET
+.NET (dependencies required vary on delivery templates)
 
 # Running
 
