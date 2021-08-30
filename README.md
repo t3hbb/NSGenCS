@@ -168,6 +168,10 @@ C:\Tools\NSGenCS>p3.exe
 
 Simples!
 
+# No work :(
+
+There is a Troubleshooting.md in the root of this repositiory that contains common issues that people encounter and how to resolve them. If your issue is not documented here, please raise an issue and I will try and find a solution for you.
+
 # Notes
 
 Templates are provided just to give you an idea of how easy it is to modify existing templates or write your own. 
@@ -198,7 +202,7 @@ Check that the payload file variable is `buf` & do regex witchcraft to replace i
 
 Check if encrypt/decrypt files have a KEYHERE placeholder and alert/break if -key not supplied
 
-Add a -noclean switch to not clean up after execution for debugging purposes
+~~Add a -noclean switch to not clean up after execution for debugging purposes
 
 Organise payloads and templates into their own folders for neatness
 
