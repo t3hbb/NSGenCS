@@ -95,21 +95,23 @@ def cleanUp(encoder,template_directory,outfile,sdir):
 
 	time.sleep(0.5)
 
-	delete_template_command = r"del {}\{}\Program.cs && del {}\{}\Program.cs && rd /s/q {}\{}\bin".format(base_dir,template_directory,base_dir,sdir,base_dir,template_directory)
-	os.system(delete_template_command)
+	if not args.noclean:
+		delete_template_command = r"del {}\{}\Program.cs && del {}\{}\Program.cs && rd /s/q {}\{}\bin".format(base_dir,template_directory,base_dir,sdir,base_dir,template_directory)
+		os.system(delete_template_command)
 
-	delete_shellcode_command = "del {}\{}\output.shellcode".format(base_dir, sdir)
-	os.system(delete_shellcode_command)
+		delete_shellcode_command = "del {}\{}\output.shellcode".format(base_dir, sdir)
+		os.system(delete_shellcode_command)
 
-	delete_bin_directory = r"rd /s/q {}\{}\bin".format(base_dir, sdir)
-	os.system(delete_bin_directory)
+		delete_bin_directory = r"rd /s/q {}\{}\bin".format(base_dir, sdir)
+		os.system(delete_bin_directory)
 
-	delete_obj_directory_command = r"rd /s/q {}\{}\obj".format(base_dir,sdir)
-	os.system(delete_obj_directory_command)
+		delete_obj_directory_command = r"rd /s/q {}\{}\obj".format(base_dir,sdir)
+		os.system(delete_obj_directory_command)
 
-	delete_template_directory_command = r"rd /s/q {}\{}\obj".format(base_dir, template_directory)
-	os.system(delete_template_directory_command)
-
+		delete_template_directory_command = r"rd /s/q {}\{}\obj".format(base_dir, template_directory)
+		os.system(delete_template_directory_command)
+	else:
+		print("Files not cleaned as -noclean flag present")
 
 
 parser = argparse.ArgumentParser(description="Generate obfuscated payloads.")
@@ -161,6 +163,13 @@ requiredNamed.add_argument(
 	help="Output file",
 	required=False,
 	default="payload.exe"
+)
+
+requiredNamed.add_argument(
+	"-noclean",
+	dest="noclean",
+	help="Prevent cleaning up of files for debugging purposes",
+	required=False,
 )
 
 args = parser.parse_args()
