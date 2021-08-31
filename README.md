@@ -100,7 +100,7 @@ If you want to use AES encryption or the like, make sure that you ensure that yo
 
 There is a DLL Injection template provided, however this doesn't take a payload as such, it takes a filename. I haven't modified this template to take the parameters from any of the methods, it's left as is so you can experiment with it. You don't need SHELLCODEHERE, ENCRYPTHERE or DECRYPTHERE, you just need to pass a string to it. You could just replace line 74 with `        string dllName = "KEYHERE";`. Create a new obfuscation method called 'Filename' and have blank encrypt and decrypt files. Or something like that - have a play :)
 
-Want to do fileless? Just have an empy `SHELLCODEHERE` and use `decrypt` to create a download function to grab your payload from a remote host (or over SMB if you want). Again make sure that your delivery template has the appropriate `using xxxxxxxxxx`.
+Want to do fileless? Just have an empty `SHELLCODEHERE` and use `decrypt` to create a download function to grab your payload from a remote host (or over SMB if you want). Again make sure that your delivery template has the appropriate `using xxxxxxxxxx`.
 
 It really is limited only by your imagination.
 
