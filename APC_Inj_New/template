@@ -52,7 +52,7 @@ public class ApcInjectionNewProcess
 	
 	private static UInt32 MEM_COMMIT = 0x1000;
  
-	private static UInt32 PAGE_EXECUTE_READWRITE = 0x40; //I'm not using this #DFIR  ;-)
+	//private static UInt32 PAGE_EXECUTE_READWRITE = 0x40; //I'm not using this #DFIR  ;-)
 	private static UInt32 PAGE_READWRITE = 0x04;
 	private static UInt32 PAGE_EXECUTE_READ = 0x20;
 	
