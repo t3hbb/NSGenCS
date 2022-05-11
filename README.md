@@ -79,7 +79,7 @@ Perfect!
 
 You can extend the existing templates or add your own in their own folder to include other defensive measures if you want.
 
-Update 05/2022 - added an Alpha template to reduce overall entropy in the file. If you are using this, you will need to specify `-shellcode shellcode4alpha` else sadness will follow.
+Update 05/2022 - added an Alpha template to reduce overall entropy in the file. If you are using this, you will need to specify `-shellcode shellcodetemplate4alpha` else sadness will follow.
 
 # Encrypt/Decrypt
 
