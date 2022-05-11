@@ -79,6 +79,8 @@ Perfect!
 
 You can extend the existing templates or add your own in their own folder to include other defensive measures if you want.
 
+Update 05/2022 - added an Alpha template to reduce overall entropy in the file. If you are using this, you will need to specify `-shellcode shellcode4alpha` else sadness will follow.
+
 # Encrypt/Decrypt
 
 The two simple examples used don't really show the extensibility of the framework. Want to prepend code to your shellcode? This is where you can do it. 

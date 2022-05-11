@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ReverseArray
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            SHELLCODEHERE
+            ENCRYPTHERE
+			            string outputshell = "\"";
+            foreach (var item in output)
+            {
+                outputshell = outputshell + (item.ToString()) +"\", \"";
+            }
+            outputshell = "string[] output = {" + outputshell.Substring(0, outputshell.Length - 3) + "};";
+            Console.WriteLine(outputshell);
+
+        }
+    }
+}
