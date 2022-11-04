@@ -115,9 +115,9 @@ You can also use the awesome donut framework (https://github.com/TheWover/donut)
 
 You can deliver nearly anything using a combination of donut and NSGenCS. donut is the closest framework to magic as far as I can tell. Want to deliver a tool that is detected but not a shellcode/beacon? Go for it - drop it using this framework and the donut loader.cs. Just make sure you use a delivery template that supports console out if you need it and specify any command line options you require (such as an output file if you don't have a template that supports console output) using the `-p"my command line options here"` flag in donut.
 
-# Pointless Functionality (Triggers AV Currently)
+# Want to load a PE and not use Donut?
 
-Also supplied is the PE_Load template adopted from Casey Smith's (@subTee) and a utility called PE2CS. The PE_LOAD template triggers Defender so use with caution!
+Also supplied is the PE_Load template adopted from Casey Smith's (@subTee) and a utility called PE2CS. The PE_LOAD template might trigger Defender so use with caution!
 
 ![image](https://user-images.githubusercontent.com/21687763/130750571-b992a951-d32b-49cd-8fb9-778ce54aca88.png)
 
